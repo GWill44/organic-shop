@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "organic-store-874bc": {
+      "hosting": {
+        "angular-organic-store": [
+          "organic-store-874bc"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "organic-store-874bc"
+  }
+}
