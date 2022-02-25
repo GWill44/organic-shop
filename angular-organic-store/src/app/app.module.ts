@@ -20,6 +20,7 @@ import {FirebaseAppModule, initializeApp, provideFirebaseApp} from '@angular/fir
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
+import {AuthService} from "./auth.service";
 
 @NgModule({
   declarations: [
@@ -44,7 +45,9 @@ import {AngularFireAuthModule} from "@angular/fire/compat/auth";
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
   ],
-  providers: [],
+  providers: [
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
