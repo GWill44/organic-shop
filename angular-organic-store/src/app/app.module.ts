@@ -16,9 +16,10 @@ import {AppRoutingModule} from "./app-routing.module";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireModule } from '@angular/fire/compat';
 import {environment} from "../environments/environment";
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import {FirebaseAppModule, initializeApp, provideFirebaseApp} from '@angular/fire/app';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
+import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { provideDatabase,getDatabase } from '@angular/fire/database';
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
-    provideDatabase(() => getDatabase())
+    provideDatabase(() => getDatabase()),
   ],
   providers: [],
   bootstrap: [AppComponent]
