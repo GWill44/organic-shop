@@ -11,6 +11,7 @@ export const environment = {
     apiKey: 'AIzaSyDKQA4uCyvQ4D8BJDSIT3KzabBNL6GDqLc',
     authDomain: 'organic-store-874bc.firebaseapp.com',
     messagingSenderId: '667052072592',
+    databaseURL: 'https://organic-store-874bc-default-rtdb.europe-west1.firebasedatabase.app'
   }
 };
 

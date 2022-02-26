@@ -22,6 +22,7 @@ import { provideDatabase,getDatabase } from '@angular/fire/database';
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {AuthService} from "./auth/auth.service";
 import {AuthGuard} from "./auth/auth-guard.service";
+import {UserService} from "./user.service";
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import {AuthGuard} from "./auth/auth-guard.service";
   ],
   providers: [
     AuthService,
-    AuthGuard
+    AuthGuard,
+    UserService
   ],
   bootstrap: [AppComponent]
 })
