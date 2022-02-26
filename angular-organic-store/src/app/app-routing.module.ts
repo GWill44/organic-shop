@@ -9,7 +9,7 @@ import {LoginComponent} from "./login/login.component";
 import {AdminProductsComponent} from "./admin/admin-products/admin-products.component";
 import {AdminOrdersComponent} from "./admin/admin-orders/admin-orders.component";
 import {MyOrdersComponent} from "./my-orders/my-orders.component";
-import {AuthGuard} from "./auth-guard.service";
+import {AuthGuard} from "./auth/auth-guard.service";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },

@@ -20,8 +20,8 @@ import {FirebaseAppModule, initializeApp, provideFirebaseApp} from '@angular/fir
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
-import {AuthService} from "./auth.service";
-import {AuthGuard} from "./auth-guard.service";
+import {AuthService} from "./auth/auth.service";
+import {AuthGuard} from "./auth/auth-guard.service";
 
 
 @NgModule({
