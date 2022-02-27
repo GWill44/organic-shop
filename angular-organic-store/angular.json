@@ -99,16 +99,6 @@
             ],
             "scripts": []
           }
-        },
-        "deploy": {
-          "builder": "@angular/fire:deploy",
-          "options": {
-            "prerender": false,
-            "ssr": false,
-            "browserTarget": "angular-organic-store:build:production",
-            "firebaseProject": "organic-store-874bc",
-            "firebaseHostingSite": "organic-store-874bc"
-          }
         }
       }
     }
