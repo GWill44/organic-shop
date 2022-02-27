@@ -9,6 +9,8 @@ import {Router} from "@angular/router";
 })
 export class BsNavbarComponent {
 
+  toggleNavbar = true;
+
   constructor(public auth: AuthService, private router: Router) { }
 
   logout() {

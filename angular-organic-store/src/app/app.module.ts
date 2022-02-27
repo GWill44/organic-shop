@@ -20,6 +20,7 @@ import {AdminAuthGuard} from "./service/auth/admin-auth-guard.service";
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {JWT_OPTIONS, JwtHelperService} from "@auth0/angular-jwt";
+import { ProductFormComponent } from './component/admin/product-form/product-form.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import {JWT_OPTIONS, JwtHelperService} from "@auth0/angular-jwt";
     MyOrdersComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
-    LoginComponent
+    LoginComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,

@@ -28,7 +28,7 @@ export class LoginComponent {
       .subscribe({
         next: result => {
           let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
-          void this.router.navigate([returnUrl || '/home']);
+          void this.router.navigate([returnUrl || '/']);
         },
         error: error => {
           this.invalidLogin = true;

@@ -1,14 +1,19 @@
 <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
-  <div class="container-fluid">
+  <div  class="container-fluid">
     <a class="navbar-brand" routerLink="/">O</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <button  class="navbar-toggler" type="button" (click)="toggleNavbar = !toggleNavbar" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
+    <div class="collapse navbar-collapse" id="navbarCollapse" [ngbCollapse]="toggleNavbar">
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
         <li class="nav-item">
           <a class="nav-link" routerLink="/shopping-cart">Shopping Cart</a>
         </li>
+        <ng-template #displayLogin>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/login">Login</a>
+          </li>
+        </ng-template>
         <li ngbDropdown *ngIf="auth.currentUser as user; else displayLogin" class="nav-item dropdown">
           <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             {{user.username}}
