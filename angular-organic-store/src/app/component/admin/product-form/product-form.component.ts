@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {CategoryService} from "../../../service/category/category.service";
+import {map} from "rxjs";
 
 @Component({
   selector: 'app-product-form',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductFormComponent implements OnInit {
 
-  constructor() { }
+  categories: any;
 
-  ngOnInit(): void {
+  constructor(private categoryService: CategoryService) { }
+
+  ngOnInit() {
+    this.categoryService.getCategories()
+      .subscribe(categories => this.categories = categories);
   }
 
 }
