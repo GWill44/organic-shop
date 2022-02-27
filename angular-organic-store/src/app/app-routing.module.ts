@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {Component, NgModule} from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
 import {HomeComponent} from "./component/home/home.component";
 import {ProductsComponent} from "./component/products/products.component";
@@ -11,6 +11,7 @@ import {AdminOrdersComponent} from "./component/admin/admin-orders/admin-orders.
 import {MyOrdersComponent} from "./component/my-orders/my-orders.component";
 import {AuthGuard} from "./service/auth/auth-guard.service";
 import {AdminAuthGuard} from "./service/auth/admin-auth-guard.service";
+import {ProductFormComponent} from "./component/admin/product-form/product-form.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -23,7 +24,7 @@ const routes: Routes = [
   { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
 
   { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-  { path: 'admin/products/new', component: AdminProductsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+  { path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
   { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuard, AdminAuthGuard] },
 
   { path: '**', component: HomeComponent }
