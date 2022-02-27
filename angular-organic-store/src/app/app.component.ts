@@ -16,9 +16,9 @@ export class AppComponent implements OnDestroy {
   constructor(private userService: UserService, private auth: AuthService , private router: Router) {
     this.userSub = this.auth.user$.subscribe(user => {
       if (user) {
+        userService.save(user);
         let returnUrl = localStorage.getItem('returnUrl');
         void this.router.navigateByUrl(returnUrl!);
-        userService.save(user);
       }
     })
   }
