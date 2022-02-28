@@ -5,27 +5,27 @@ import {catchError, map, throwError} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService {
+export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  getCategories() {
+  getProducts() {
     const token = <string> localStorage.getItem('token');
     const headers = new HttpHeaders()
       .set('Authorization', token)
       .set('Access-Control-Allow-Origin', '*');
-    return this.http.get('http://localhost:8080/api/category/all', {'headers': headers}).pipe(
+    return this.http.get('http://localhost:8080/api/products/all', {'headers': headers}).pipe(
       map(response => response),
       catchError((error: Response) => throwError(() => error))
     );
   }
 
-  addCategory(formContent) {
+  addProduct(formContent) {
     const token = <string> localStorage.getItem('token');
     const headers = new HttpHeaders()
       .set('Authorization', token)
       .set('Access-Control-Allow-Origin', '*');
-    return this.http.post('http://localhost:8080/api/category/add', formContent, {'headers': headers}).pipe(
+    return this.http.post('http://localhost:8080/api/product/add', formContent, {'headers': headers}).pipe(
       map(response => response),
       catchError((error: Response) => throwError(() => error))
     );
