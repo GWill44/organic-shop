@@ -15,9 +15,9 @@ export class ProductFormComponent implements OnInit, OnDestroy{
   categories: any;
   form = new FormGroup({
     title: new FormControl('', [Validators.required]),
-    price: new FormControl('',[Validators.required]),
+    price: new FormControl('',[Validators.required, Validators.min(0)]),
     category: new FormControl('', [Validators.required]),
-    imageUrl: new FormControl('', [Validators.required])
+    imageUrl: new FormControl('', [Validators.required, Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')])
   })
 
   categoriesSub: Subscription;
