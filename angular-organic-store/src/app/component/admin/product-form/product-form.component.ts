@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CategoryService} from "../../../service/category/category.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Subscription, throwError} from "rxjs";
-import {Router} from "@angular/router";
+import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {ProductService} from "../../../service/product/product.service";
+import {take} from "rxjs";
 
 @Component({
   selector: 'app-product-form',
@@ -13,6 +13,8 @@ import {ProductService} from "../../../service/product/product.service";
 export class ProductFormComponent implements OnInit {
 
   categories$;
+
+  product;
 
   form = new FormGroup({
     title: new FormControl('', [Validators.required]),
@@ -24,10 +26,16 @@ export class ProductFormComponent implements OnInit {
   constructor(
     private categoryService: CategoryService,
     private productService: ProductService,
-    private router: Router) { }
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.categories$ = this.categoryService.getCategories();
+
+    let id = this.route.snapshot.paramMap.get('id');
+    if (id) this.productService.getProduct(id).pipe(
+      take(1))
+      .subscribe(p => this.product = p);
   }
 
   onSubmit(formContent: any) {

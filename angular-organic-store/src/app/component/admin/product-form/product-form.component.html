@@ -3,7 +3,8 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
       <div class="form-group">
         <label for="title">Title</label>
-        <input formControlName="title" id="title" type="text" class="form-control">
+        <input *ngIf="product" formControlName="title" [(ngModel)]="product.title" type="text" class="form-control">
+        <input *ngIf="!product" formControlName="title" id="title" type="text" class="form-control">
         <div *ngIf="title?.touched && title?.invalid" class="alert alert-danger">
           <div *ngIf="title?.errors?.['required']">Title is required.</div>
         </div>
@@ -12,7 +13,8 @@
         <label for="price">Price</label>
         <div class="input-group">
           <span class="input-group-text">$</span>
-          <input formControlName="price" id="price" type="number" class="form-control">
+          <input *ngIf="product" formControlName="price" [(ngModel)]="product.price" type="number" class="form-control">
+          <input *ngIf="!product"formControlName="price" id="price" type="number" class="form-control">
           <span class="input-group-text">.00</span>
         </div>
       </div>
@@ -22,7 +24,10 @@
       </div>
       <div class="form-group">
         <label for="category">Category</label>
-        <select formControlName="category" id="category" class="form-control">
+        <select *ngIf="product" formControlName="category" [(ngModel)]="product.category" class="form-control">
+          <option *ngFor="let category of categories$ | async">{{category.category}}</option>
+        </select>
+        <select *ngIf="!product" formControlName="category" id="category" class="form-control">
           <option value="">Category options...</option>
           <option *ngFor="let category of categories$ | async">{{category.category}}</option>
         </select>
@@ -32,7 +37,8 @@
       </div>
       <div class="form-group">
         <label for="imageUrl">Image URL</label>
-        <input formControlName="imageUrl" id="imageUrl" type="text" class="form-control">
+        <input *ngIf="product" formControlName="imageUrl" [(ngModel)]="product.image_url" type="text" class="form-control">
+        <input *ngIf="!product" formControlName="imageUrl" id="imageUrl" type="text" class="form-control">
       </div>
       <div *ngIf="imageUrl?.touched && imageUrl?.invalid" class="alert alert-danger">
         <div *ngIf="imageUrl?.errors?.['required']">Image URL is required.</div>
