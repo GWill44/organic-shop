@@ -10,7 +10,7 @@ import {ProductService} from "../../../service/product/product.service";
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.css']
 })
-export class ProductFormComponent implements OnInit, OnDestroy{
+export class ProductFormComponent implements OnInit {
 
   categories: any;
   form = new FormGroup({
@@ -20,34 +20,22 @@ export class ProductFormComponent implements OnInit, OnDestroy{
     imageUrl: new FormControl('', [Validators.required, Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')])
   })
 
-  categoriesSub: Subscription;
-  productSub: Subscription;
-
   constructor(
     private categoryService: CategoryService,
     private productService: ProductService,
     private router: Router) { }
 
   ngOnInit() {
-    this.categoriesSub = this.categoryService.getCategories()
-      .subscribe(categories => this.categories = categories);
+    this.categoryService.getCategories();
   }
 
   onSubmit(formContent: any) {
-    this.productSub = this.productService.addProduct(formContent)
-      .subscribe({
-        next: () => void this.router.navigate(['/admin/products']),
-        error: (error: Response) => throwError(() => error)
-      })
+    this.productService.addProduct(formContent);
+    this.router.navigate(['/admin/products']);
   }
 
   get title(){ return this.form.get('title'); }
   get price(){ return this.form.get('price'); }
   get category(){ return this.form.get('category'); }
   get imageUrl(){ return this.form.get('imageUrl'); }
-
-  ngOnDestroy() {
-    this.categoriesSub.unsubscribe();
-    this.productSub.unsubscribe();
-  }
 }
