@@ -12,13 +12,14 @@ import {ProductService} from "../../../service/product/product.service";
 })
 export class ProductFormComponent implements OnInit {
 
-  categories: any;
+  categories$;
+
   form = new FormGroup({
     title: new FormControl('', [Validators.required]),
     price: new FormControl('',[Validators.required, Validators.min(0)]),
     category: new FormControl('', [Validators.required]),
     imageUrl: new FormControl('', [Validators.required, Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')])
-  })
+  });
 
   constructor(
     private categoryService: CategoryService,
@@ -26,7 +27,7 @@ export class ProductFormComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.categoryService.getCategories();
+    this.categories$ = this.categoryService.getCategories();
   }
 
   onSubmit(formContent: any) {

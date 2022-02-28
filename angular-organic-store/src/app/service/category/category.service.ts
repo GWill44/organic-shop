@@ -14,10 +14,7 @@ export class CategoryService {
     const headers = new HttpHeaders()
       .set('Authorization', token)
       .set('Access-Control-Allow-Origin', '*');
-    return this.http.get('http://localhost:8080/api/category/all', {'headers': headers}).pipe(
-      map(response => response),
-      catchError((error: Response) => throwError(() => error))
-    );
+    return this.http.get('http://localhost:8080/api/category/all', {'headers': headers});
   }
 
   addCategory(formContent) {

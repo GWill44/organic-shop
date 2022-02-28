@@ -24,7 +24,7 @@
         <label for="category">Category</label>
         <select formControlName="category" id="category" class="form-control">
           <option value="">Category options...</option>
-          <option *ngFor="let category of categories">{{category.category}}</option>
+          <option *ngFor="let category of categories$ | async">{{category.category}}</option>
         </select>
         <div *ngIf="category?.touched && category?.invalid" class="alert alert-danger">
           <div *ngIf="category?.errors?.['required']">Category is required.</div>

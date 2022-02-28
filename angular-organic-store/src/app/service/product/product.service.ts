@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {catchError, map, throwError} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +13,7 @@ export class ProductService {
     const headers = new HttpHeaders()
       .set('Authorization', token)
       .set('Access-Control-Allow-Origin', '*');
-    return this.http.get('http://localhost:8080/api/products/all', {'headers': headers}).pipe(
-      map(response => response),
-      catchError((error: Response) => throwError(() => error))
-    );
+    return this.http.get('http://localhost:8080/api/product/all', {'headers': headers});
   }
 
   addProduct(formContent) {
@@ -25,9 +21,6 @@ export class ProductService {
     const headers = new HttpHeaders()
       .set('Authorization', token)
       .set('Access-Control-Allow-Origin', '*');
-    return this.http.post('http://localhost:8080/api/product/add', formContent, {'headers': headers}).pipe(
-      map(response => response),
-      catchError((error: Response) => throwError(() => error))
-    );
+    return this.http.post('http://localhost:8080/api/product/add', formContent, {'headers': headers});
   }
 }
