@@ -1,4 +1,8 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+  <div *ngIf="title?.touched && title?.invalid" class="alert alert-danger">Title is required.</div>
+  <div *ngIf="price?.touched && price?.invalid" class="alert alert-danger">Price is required.</div>
+  <div *ngIf="category?.touched && category?.invalid" class="alert alert-danger">Category is required.</div>
+  <div *ngIf="imageUrl?.touched && imageUrl?.invalid" class="alert alert-danger">Image URL is required.</div>
   <div class="form-group">
     <label for="title">Title</label>
     <input formControlName="title" id="title" type="text" class="form-control">
@@ -14,7 +18,7 @@
   <div class="form-group">
     <label for="category">Category</label>
     <select formControlName="category" id="category" class="form-control">
-      <option value=""></option>
+      <option value="">Category options...</option>
       <option *ngFor="let category of categories">{{category.category}}</option>
     </select>
   </div>
@@ -22,5 +26,5 @@
     <label for="imageUrl">Image URL</label>
     <input formControlName="imageUrl" id="imageUrl" type="text" class="form-control">
   </div>
-  <button class="btn btn-primary" type="submit">Save</button>
+  <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Save</button>
 </form>

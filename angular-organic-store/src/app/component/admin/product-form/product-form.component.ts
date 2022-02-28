@@ -14,10 +14,10 @@ export class ProductFormComponent implements OnInit, OnDestroy{
 
   categories: any;
   form = new FormGroup({
-    title: new FormControl(''),
-    price: new FormControl(''),
-    category: new FormControl(''),
-    imageUrl: new FormControl('')
+    title: new FormControl('', [Validators.required]),
+    price: new FormControl('',[Validators.required]),
+    category: new FormControl('', [Validators.required]),
+    imageUrl: new FormControl('', [Validators.required])
   })
 
   categoriesSub: Subscription;
@@ -41,8 +41,10 @@ export class ProductFormComponent implements OnInit, OnDestroy{
       })
   }
 
-  get username(){ return this.form.get('username'); }
-  get password(){ return this.form.get('password'); }
+  get title(){ return this.form.get('title'); }
+  get price(){ return this.form.get('price'); }
+  get category(){ return this.form.get('category'); }
+  get imageUrl(){ return this.form.get('imageUrl'); }
 
   ngOnDestroy() {
     this.categoriesSub.unsubscribe();
