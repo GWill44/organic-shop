@@ -1,21 +1,20 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {CategoryService} from "../../../service/category/category.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, ParamMap, Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../../../service/product/product.service";
-import {take} from "rxjs";
+import {Observable, Subscription, tap} from "rxjs";
 
 @Component({
   selector: 'app-product-form',
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.css']
 })
-export class ProductFormComponent implements OnInit {
+export class ProductFormComponent {
 
   categories$;
-
-  product;
-
+  product$: Observable<Product>;
+  id;
   form = new FormGroup({
     title: new FormControl('', [Validators.required]),
     price: new FormControl('',[Validators.required, Validators.min(0)]),
@@ -32,19 +31,38 @@ export class ProductFormComponent implements OnInit {
   ngOnInit() {
     this.categories$ = this.categoryService.getCategories();
 
-    let id = this.route.snapshot.paramMap.get('id');
-    if (id) this.productService.getProduct(id).pipe(
-      take(1))
-      .subscribe(p => this.product = p);
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.product$ = this.productService.getProduct(this.id).pipe(
+      tap((product: Product) => {
+        this.form.controls['title'].setValue(product.title);
+        this.form.controls['price'].setValue(product.price);
+        this.form.controls['category'].setValue(product.category);
+        this.form.controls['imageUrl'].setValue(product.image_url);
+      })
+    )
+
   }
 
-  onSubmit(formContent: any) {
-    this.productService.addProduct(formContent);
-    this.router.navigate(['/admin/products']);
+  onSubmit(formContent) {
+    if (this.id){
+      this.productService.updateProduct(formContent, this.id);
+      this.router.navigate(['/admin/products']);
+    } else {
+      this.productService.addProduct(formContent)
+      this.router.navigate(['/admin/products']);
+    }
   }
 
   get title(){ return this.form.get('title'); }
   get price(){ return this.form.get('price'); }
   get category(){ return this.form.get('category'); }
   get imageUrl(){ return this.form.get('imageUrl'); }
+}
+
+export interface Product {
+  id;
+  title;
+  price;
+  category;
+  image_url;
 }

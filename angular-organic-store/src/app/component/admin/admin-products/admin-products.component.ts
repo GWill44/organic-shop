@@ -6,12 +6,10 @@ import {ProductService} from "../../../service/product/product.service";
   templateUrl: './admin-products.component.html',
   styleUrls: ['./admin-products.component.css']
 })
-export class AdminProductsComponent implements OnInit {
+export class AdminProductsComponent {
   products$;
 
-  constructor(private productService: ProductService) { }
-
-  ngOnInit() {
+  constructor(private productService: ProductService) {
     this.products$ = this.productService.getAll();
   }
 
