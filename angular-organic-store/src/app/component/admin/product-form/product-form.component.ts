@@ -32,6 +32,7 @@ export class ProductFormComponent {
     this.categories$ = this.categoryService.getCategories();
 
     this.id = this.route.snapshot.paramMap.get('id');
+
     this.product$ = this.productService.getProduct(this.id).pipe(
       tap((product: Product) => {
         this.form.controls['title'].setValue(product.title);
