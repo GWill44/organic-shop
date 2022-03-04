@@ -41,7 +41,6 @@ export class ProductFormComponent {
         this.form.controls['imageUrl'].setValue(product.image_url);
       })
     )
-
   }
 
   onSubmit(formContent) {
@@ -50,6 +49,13 @@ export class ProductFormComponent {
       this.router.navigate(['/admin/products']);
     } else {
       this.productService.addProduct(formContent)
+      this.router.navigate(['/admin/products']);
+    }
+  }
+
+  delete(id: number) {
+    if (confirm('Are you sure you wish to delete this product?')) {
+      this.productService.deleteProduct(id);
       this.router.navigate(['/admin/products']);
     }
   }

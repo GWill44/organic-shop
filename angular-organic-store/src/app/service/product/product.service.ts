@@ -35,12 +35,22 @@ export class ProductService {
       .subscribe();
   }
 
-  updateProduct(product:any, id: string) {
+  updateProduct(product:any, id: number) {
     const token = <string> localStorage.getItem('token');
     const headers = new HttpHeaders()
       .set('Authorization', token)
       .set('Access-Control-Allow-Origin', '*');
     return this.http.put('http://localhost:8080/api/product/update', {id: id, ...product}, {'headers': headers}).pipe(
+      take(1)
+    ).subscribe();
+  }
+
+  deleteProduct(id: number) {
+    const token = <string> localStorage.getItem('token');
+    const headers = new HttpHeaders()
+      .set('Authorization', token)
+      .set('Access-Control-Allow-Origin', '*');
+    return this.http.delete(`http://localhost:8080/api/product/delete/${id}`,{headers: headers}).pipe(
       take(1)
     ).subscribe();
   }

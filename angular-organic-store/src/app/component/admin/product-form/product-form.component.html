@@ -40,6 +40,7 @@
           <div *ngIf="imageUrl?.errors?.['pattern']">Image URL is invalid.</div>
         </div>
         <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Save</button>
+        <button class="btn btn-danger" type="button" (click)="delete(product.id)">Delete</button>
       </form>
     </div>
   </div>

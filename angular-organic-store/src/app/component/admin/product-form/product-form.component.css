@@ -1,2 +1,7 @@
-.btn{margin-top: 20px}
-.form-group{margin-top: 10px}
+.btn{
+  margin-top: 20px;
+  margin-right: 5px;
+}
+.form-group{
+  margin-top: 10px;
+}
