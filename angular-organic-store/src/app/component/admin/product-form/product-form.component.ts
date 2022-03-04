@@ -30,7 +30,7 @@ export class ProductFormComponent {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.categories$ = this.categoryService.getCategories();
+    this.categories$ = this.categoryService.getAll();
 
     this.id = this.route.snapshot.paramMap.get('id');
 

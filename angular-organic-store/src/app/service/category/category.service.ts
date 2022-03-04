@@ -9,7 +9,7 @@ export class CategoryService {
 
   constructor(private http: HttpClient) { }
 
-  getCategories() {
+  getAll() {
     const token = <string> localStorage.getItem('token');
     const headers = new HttpHeaders()
       .set('Authorization', token)
