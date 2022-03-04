@@ -25,6 +25,7 @@ import {CategoryService} from "./service/category/category.service";
 import {ProductService} from "./service/product/product.service";
 import { DataTablesModule } from "angular-datatables";
 import {ProductFilterComponent} from "./component/products/product-filter/product-filter.component";
+import { ProductCardComponent } from './component/products/product-card/product-card.component';
 
 
 
@@ -42,7 +43,8 @@ import {ProductFilterComponent} from "./component/products/product-filter/produc
     AdminOrdersComponent,
     LoginComponent,
     ProductFormComponent,
-    ProductFilterComponent
+    ProductFilterComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,
