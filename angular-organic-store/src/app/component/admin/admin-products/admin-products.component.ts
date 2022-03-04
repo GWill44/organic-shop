@@ -10,7 +10,6 @@ import {Product} from "../../../model/product";
 })
 export class AdminProductsComponent implements OnDestroy{
   products: Product[];
-  filteredProducts: Product[];
   productsSub: Subscription;
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
@@ -18,24 +17,16 @@ export class AdminProductsComponent implements OnDestroy{
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.dtOptions = {
-      pagingType: 'full_numbers'
-    }
     this.productsSub = this.productService.getAll()
       .subscribe((products : any) => {
         this.dtTrigger.next(
-          this.filteredProducts = this.products = products);
+          this.products = products);
       });
-  }
-
-  filter(query: string) {
-    this.filteredProducts = (query) ?
-      this.products.filter(p => p.title.toLowerCase().includes(query.toLowerCase())) :
-      this.products;
   }
 
   ngOnDestroy(): void {
     this.productsSub.unsubscribe();
+    this.dtTrigger.unsubscribe();
   }
 }
 
