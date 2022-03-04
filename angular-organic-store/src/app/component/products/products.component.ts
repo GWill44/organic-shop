@@ -1,6 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProductService} from "../../service/product/product.service";
-import {CategoryService} from "../../service/category/category.service";
 import {ActivatedRoute} from "@angular/router";
 import {Subscription, switchMap} from "rxjs";
 import {Product} from "../../model/product";
@@ -10,15 +9,13 @@ import {Product} from "../../model/product";
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit, OnDestroy {
-  categories$;
+export class ProductsComponent implements OnInit{
   products: Product[] = [];
   filteredProducts: Product[];
   productsSub: Subscription;
 
   constructor(
     private productService: ProductService,
-    private categoryService: CategoryService,
     private route: ActivatedRoute) {}
 
   ngOnInit(){
@@ -33,11 +30,5 @@ export class ProductsComponent implements OnInit, OnDestroy {
           this.products.filter(product => product.category === category) :
           this.products;
       });
-
-    this.categories$ = this.categoryService.getAll();
     }
-
-  ngOnDestroy() {
-    this.productsSub.unsubscribe();
-  }
 }

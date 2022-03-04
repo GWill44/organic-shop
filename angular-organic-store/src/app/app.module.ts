@@ -24,6 +24,8 @@ import {ProductFormComponent} from './component/admin/product-form/product-form.
 import {CategoryService} from "./service/category/category.service";
 import {ProductService} from "./service/product/product.service";
 import { DataTablesModule } from "angular-datatables";
+import {ProductFilterComponent} from "./component/products/product-filter/product-filter.component";
+
 
 
 @NgModule({
@@ -39,7 +41,8 @@ import { DataTablesModule } from "angular-datatables";
     AdminProductsComponent,
     AdminOrdersComponent,
     LoginComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    ProductFilterComponent
   ],
   imports: [
     BrowserModule,
