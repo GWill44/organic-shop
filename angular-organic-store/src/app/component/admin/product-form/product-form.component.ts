@@ -1,9 +1,10 @@
-import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {CategoryService} from "../../../service/category/category.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../../../service/product/product.service";
-import {Observable, Subscription, tap} from "rxjs";
+import {Observable, tap} from "rxjs";
+import {Product} from "../../../model/product";
 
 @Component({
   selector: 'app-product-form',
@@ -66,10 +67,3 @@ export class ProductFormComponent {
   get imageUrl(){ return this.form.get('imageUrl'); }
 }
 
-export interface Product {
-  id;
-  title;
-  price;
-  category;
-  image_url;
-}
