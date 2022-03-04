@@ -1,8 +1,10 @@
-<div class="card" style="width: 18rem;">
+<div class="card">
   <img src="{{product.image_url}}" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">{{product.title}}</h5>
     <p class="card-text">{{product.price | currency: 'USD'}}</p>
-    <a href="#" class="btn btn-primary">Add to Cart</a>
+  </div>
+  <div class="card-footer d-grid">
+    <a class="btn btn-primary btn-block">Add to Cart</a>
   </div>
 </div>
