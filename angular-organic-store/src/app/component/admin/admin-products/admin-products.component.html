@@ -4,21 +4,25 @@
 <p>
   <input #query (keyup)="filter(query.value)" type="text" class="form-control" placeholder="Search..">
 </p>
-<table class="table">
-  <thead>
-  <tr>
-    <td>Title</td>
-    <td>Price</td>
-    <td></td>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let product of filteredProducts">
-    <td>{{product.title}}</td>
-    <td>{{product.price | currency:'USD':'symbol-narrow'}}</td>
-    <td>
-      <a [routerLink]="['/admin/products', product.id]">Edit</a>
-    </td>
-  </tr>
-  </tbody>
-</table>
+<div class="container">
+  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped table-hover">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Price</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let product of filteredProducts">
+      <td>{{product.id}}</td>
+      <td>{{product.title}}</td>
+      <td>{{product.price}}</td>
+      <td>
+        <a [routerLink]="['/admin/products', product.id]">Edit</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

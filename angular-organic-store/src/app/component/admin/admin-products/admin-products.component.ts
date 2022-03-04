@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProductService} from "../../../service/product/product.service";
-import {Subscription} from "rxjs";
+import {Subject, Subscription} from "rxjs";
 import {Product} from "../../../model/product";
 
 @Component({
@@ -12,10 +12,20 @@ export class AdminProductsComponent implements OnDestroy{
   products: Product[];
   filteredProducts: Product[];
   productsSub: Subscription;
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject<any>();
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService) { }
+
+  ngOnInit(): void {
+    this.dtOptions = {
+      pagingType: 'full_numbers'
+    }
     this.productsSub = this.productService.getAll()
-      .subscribe((products: any) => this.filteredProducts = this.products = products);
+      .subscribe((products : any) => {
+        this.dtTrigger.next(
+          this.filteredProducts = this.products = products);
+      });
   }
 
   filter(query: string) {
