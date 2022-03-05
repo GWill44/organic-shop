@@ -1,22 +1,41 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {Product} from "../../model/product";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingCartService {
 
-  constructor() { }
+  addProduct(product: Product){
+    let shoppingCart: CartProduct[] = this.getCart();
+    let quantity = this.productQuantity(product, shoppingCart)
+    let cartProduct = {quantity: quantity, ...product}
 
-  add(product){
-    let shoppingCart = (localStorage.getItem('shoppingCart')) ?
-      JSON.parse(<string>localStorage.getItem('shoppingCart')) : [];
-    shoppingCart.push(product);
-    localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart))
+    let newShoppingCart = shoppingCart.filter((cartProduct) => cartProduct.title !== product.title);
+
+    newShoppingCart.push(cartProduct);
+    localStorage.setItem('shoppingCart', JSON.stringify(newShoppingCart))
   }
 
   getCart(){
-    let shoppingCart = (localStorage.getItem('shoppingCart')) ?
+    return (localStorage.getItem('shoppingCart')) ?
       JSON.parse(<string>localStorage.getItem('shoppingCart')) : [];
-    return shoppingCart;
   }
+
+  productQuantity(product: Product, shoppingCart: CartProduct[]) : number {
+    let foundProduct = shoppingCart.find((cartProduct: CartProduct) => cartProduct.title === product.title);
+    if (foundProduct) {
+      return foundProduct.quantity + 1;
+    }
+    return 1;
+  }
+}
+
+export interface CartProduct {
+  quantity: number;
+  id: number;
+  title: string;
+  price: number;
+  category: string;
+  url: string;
 }
