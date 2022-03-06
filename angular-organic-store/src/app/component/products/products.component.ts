@@ -4,6 +4,7 @@ import {ActivatedRoute} from "@angular/router";
 import {Subscription, switchMap} from "rxjs";
 import {Product} from "../../model/product";
 
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',

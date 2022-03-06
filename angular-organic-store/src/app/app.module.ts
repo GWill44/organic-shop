@@ -26,6 +26,7 @@ import {ProductService} from "./service/product/product.service";
 import { DataTablesModule } from "angular-datatables";
 import {ProductFilterComponent} from "./component/products/product-filter/product-filter.component";
 import { ProductCardComponent } from './component/products/product-card/product-card.component';
+import {ShoppingCartService} from "./service/shopping-cart/shopping-cart.service";
 
 
 
@@ -61,7 +62,8 @@ import { ProductCardComponent } from './component/products/product-card/product-
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
     JwtHelperService,
     CategoryService,
-    ProductService
+    ProductService,
+    ShoppingCartService
   ],
   bootstrap: [AppComponent]
 })

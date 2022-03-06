@@ -6,8 +6,24 @@
   </div>
   <div class="card-footer d-grid">
     <button
-    (click)="addToCart(product)"
-    class="btn btn-primary btn-block"
+      *ngIf="quantity === 0; else updateQuantity"
+      (click)="addToCart(product)"
+      class="btn btn-primary btn-block"
     >Add to Cart</button>
   </div>
 </div>
+
+<ng-template #updateQuantity>
+  <div class="row">
+    <div class="col-2">
+      <button style="width:100%" class="btn btn-primary"> - </button>
+    </div>
+    <div class="col">
+      <div style="text-align: center">{{quantity}}</div>
+    </div>
+    <div class="col-2">
+      <button style="float: right; width:100%" class="btn btn-primary"> + </button>
+    </div>
+
+  </div>
+</ng-template>
