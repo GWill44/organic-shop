@@ -7,11 +7,9 @@ import {ShoppingCartItem} from "../../model/shopping-cart-item";
 })
 export class ShoppingCartService {
 
-  updateCart(product: Product, addition: boolean) {
+  updateCart(product: Product, addition: number) {
     let shoppingCart: ShoppingCartItem[] = this.getCart();
-    let quantity = (addition) ?
-      this.getItemQuantity(product) + 1 :
-      (this.getItemQuantity(product) === 0) ? 0 : this.getItemQuantity(product) - 1;
+    let quantity = this.getItemQuantity(product) + addition;
     let cartProduct = {quantity: quantity, ...product}
     let newShoppingCart = shoppingCart.filter((cartProduct) => cartProduct.title !== product.title);
     if(quantity > 0) newShoppingCart.push(cartProduct);

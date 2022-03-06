@@ -17,7 +17,7 @@ export class ProductCardComponent implements OnInit {
     this.quantity = this.shoppingCartService.getItemQuantity(this.product);
   }
 
-  updateCart(product: Product, addition: boolean) {
+  updateCart(product: Product, addition: number) {
     this.shoppingCartService.updateCart(product, addition);
     this.quantity = this.shoppingCartService.getItemQuantity(product);
   }
