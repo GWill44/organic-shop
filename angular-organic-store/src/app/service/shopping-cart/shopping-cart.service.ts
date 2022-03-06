@@ -1,25 +1,28 @@
 import {Injectable} from '@angular/core';
 import {Product} from "../../model/product";
+import {ShoppingCartItem} from "../../model/shopping-cart-item";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingCartService {
 
-  updateCart(product: Product, add: boolean) {
-    let shoppingCart: CartProduct[] = this.getCart();
+  cart;
 
-    let quantity = (add) ?
-      this.getQuantity(product) + 1 :
-      (this.getQuantity(product) === 0) ? 0 : this.getQuantity(product) - 1;
+  constructor(){
+    this.cart = this.getCart();
+  }
 
+  updateCart(product: Product, addition: boolean) {
+    let shoppingCart: ShoppingCartItem[] = this.getCart();
+    let quantity = (addition) ?
+      this.getItemQuantity(product) + 1 :
+      (this.getItemQuantity(product) === 0) ? 0 : this.getItemQuantity(product) - 1;
     let cartProduct = {quantity: quantity, ...product}
-
     let newShoppingCart = shoppingCart.filter((cartProduct) => cartProduct.title !== product.title);
-
     if(quantity > 0) newShoppingCart.push(cartProduct);
+    this.cart = newShoppingCart;
     localStorage.setItem('shoppingCart', JSON.stringify(newShoppingCart))
-
   }
 
   getCart(){
@@ -27,21 +30,22 @@ export class ShoppingCartService {
       JSON.parse(<string>localStorage.getItem('shoppingCart')) : [];
   }
 
-  getQuantity(product: Product){
+  getItemQuantity(product: Product){
     return this.getProduct(product) ?
       this.getProduct(product)!.quantity : 0;
   }
 
+  getTotalItemQuantity(){
+    let quantity = 0;
+    let shoppingCart: ShoppingCartItem[] = this.getCart();
+    for(let item of shoppingCart){
+      quantity = quantity + item.quantity
+    }
+    return quantity;
+  }
+
   getProduct(product: Product){
-    return this.getCart().find((cartProduct: CartProduct) => cartProduct.title === product.title);
+    return this.getCart().find((shoppingCartItem: ShoppingCartItem) => shoppingCartItem.title === product.title);
   }
 }
 
-export interface CartProduct {
-  quantity: number;
-  id: number;
-  title: string;
-  price: number;
-  category: string;
-  url: string;
-}
