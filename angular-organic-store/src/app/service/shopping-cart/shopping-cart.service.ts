@@ -1,21 +1,25 @@
 import {Injectable} from '@angular/core';
 import {Product} from "../../model/product";
-import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingCartService {
 
-  addProduct(product: Product){
+  updateCart(product: Product, add: boolean) {
     let shoppingCart: CartProduct[] = this.getCart();
-    let quantity = this.getQuantity(product) + 1;
+
+    let quantity = (add) ?
+      this.getQuantity(product) + 1 :
+      (this.getQuantity(product) === 0) ? 0 : this.getQuantity(product) - 1;
+
     let cartProduct = {quantity: quantity, ...product}
 
     let newShoppingCart = shoppingCart.filter((cartProduct) => cartProduct.title !== product.title);
 
-    newShoppingCart.push(cartProduct);
+    if(quantity > 0) newShoppingCart.push(cartProduct);
     localStorage.setItem('shoppingCart', JSON.stringify(newShoppingCart))
+
   }
 
   getCart(){
@@ -23,7 +27,7 @@ export class ShoppingCartService {
       JSON.parse(<string>localStorage.getItem('shoppingCart')) : [];
   }
 
-  getQuantity(product: Product) {
+  getQuantity(product: Product){
     return this.getProduct(product) ?
       this.getProduct(product)!.quantity : 0;
   }

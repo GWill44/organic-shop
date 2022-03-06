@@ -19,10 +19,11 @@ export class ProductCardComponent implements OnInit {
     this.quantity = this.shoppingCartService.getQuantity(this.product);
   }
 
-  addToCart(product: Product) {
-    this.shoppingCartService.addProduct(product);
+  updateCart(product: Product, addition: boolean) {
+    this.shoppingCartService.updateCart(product, addition);
     this.quantity = this.shoppingCartService.getQuantity(product);
   }
+
 }
 
 
