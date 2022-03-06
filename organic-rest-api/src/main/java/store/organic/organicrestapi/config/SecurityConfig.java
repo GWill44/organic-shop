@@ -29,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .mvcMatchers( "/api/user/register", "/api/user/login", "/api/order/create").permitAll()
+                .mvcMatchers( "/api/user/register", "/api/user/login", "/api/product/all", "/api/category/all").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new JWTAuthenticationFilter(jwtService),

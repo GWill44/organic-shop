@@ -12,7 +12,6 @@ import store.organic.organicrestapi.service.CategoryService;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping(value = "/api/category")
 public class CategoryController {
@@ -21,7 +20,6 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping("/all")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<Category>> getOrders() {
         List <Category> categoryList = categoryService.getAll();
         return new ResponseEntity<>(categoryList, HttpStatus.OK);
