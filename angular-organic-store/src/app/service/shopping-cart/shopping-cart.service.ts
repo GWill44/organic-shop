@@ -7,12 +7,6 @@ import {ShoppingCartItem} from "../../model/shopping-cart-item";
 })
 export class ShoppingCartService {
 
-  cart;
-
-  constructor(){
-    this.cart = this.getCart();
-  }
-
   updateCart(product: Product, addition: boolean) {
     let shoppingCart: ShoppingCartItem[] = this.getCart();
     let quantity = (addition) ?
@@ -21,7 +15,6 @@ export class ShoppingCartService {
     let cartProduct = {quantity: quantity, ...product}
     let newShoppingCart = shoppingCart.filter((cartProduct) => cartProduct.title !== product.title);
     if(quantity > 0) newShoppingCart.push(cartProduct);
-    this.cart = newShoppingCart;
     localStorage.setItem('shoppingCart', JSON.stringify(newShoppingCart))
   }
 
