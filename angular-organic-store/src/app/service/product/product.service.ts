@@ -15,12 +15,12 @@ export class ProductService {
     return this.http.get('http://localhost:8080/api/product/all', {'headers': headers});
   }
 
-  getProduct(id: string): any {
+  getProduct(id: number): any {
     const token = <string> localStorage.getItem('token');
     const headers = new HttpHeaders()
       .set('Authorization', token)
       .set('Access-Control-Allow-Origin', '*');
-    return this.http.get(`http://localhost:8080/api/product/${id}`, {'headers': headers});
+    return this.http.get(`http://localhost:8080/api/product/get${id}`, {'headers': headers});
   }
 
   addProduct(formContent: Observable<Object>) {

@@ -3,20 +3,29 @@
 <table class="table" *ngIf="shoppingCartService.getTotalItemQuantity()>0">
   <thead>
   <tr>
-    <th>Product</th>
-    <th style="float: right; width: 75%">Quantity</th>
-    <th>Price</th>
+    <th class="col-4">Product</th>
+    <th class="col-4" style="text-align: center">Quantity</th>
+    <th class="col-4">Price</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let item of shoppingCartService.getCart()">
     <td>{{item.title}}</td>
     <td>
-      <i class="bi bi-dash-circle" style="float: left; width:33%"></i>
-      <i class="bi bi-plus-circle" style="float: right; width:33%"></i>
-      <p style="float: right; width:33%">{{item.quantity}}</p>
+      <button
+        (click)="updateCart(item.id, -1)"
+        type="button" class="btn btn-outline-secondary" style="float: left; width: 10%; margin-left: 30%"
+      > - </button>
+      <button
+        (click)="updateCart(item.id, 1)"
+        type="button" class="btn btn-outline-secondary" style="float: right; width: 10%; margin-right:30%"
+      > + </button>
+      <p style="float: right; width:11%">{{item.quantity}}</p>
     </td>
     <td>{{item.price*item.quantity | currency: 'USD'}}</td>
+    <td>
+
+    </td>
   </tr>
   </tbody>
 </table>

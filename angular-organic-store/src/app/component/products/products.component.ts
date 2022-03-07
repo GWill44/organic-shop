@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProductService} from "../../service/product/product.service";
 import {ActivatedRoute} from "@angular/router";
 import {Subscription, switchMap} from "rxjs";
@@ -10,7 +10,7 @@ import {Product} from "../../model/product";
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit{
+export class ProductsComponent implements OnInit, OnDestroy {
   products: Product[] = [];
   filteredProducts: Product[];
   productsSub: Subscription;
@@ -20,7 +20,7 @@ export class ProductsComponent implements OnInit{
     private route: ActivatedRoute) {}
 
   ngOnInit(){
-    this.productService.getAll().pipe(
+    this.productsSub = this.productService.getAll().pipe(
       switchMap((products: any) => {
         this.products = products;
         return this.route.queryParamMap;
@@ -31,5 +31,9 @@ export class ProductsComponent implements OnInit{
           this.products.filter(product => product.category === category) :
           this.products;
       });
-    }
+  }
+
+  ngOnDestroy() {
+    this.productsSub.unsubscribe();
+  }
 }
