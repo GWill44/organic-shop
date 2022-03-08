@@ -11,12 +11,12 @@ public class Category {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
-    private String category;
+    private String name;
 
     public Category() {}
 
-    public Category(String category) {
-        this.category = category;
+    public Category(String name) {
+        this.name = name;
     }
 
     public Integer getId() {
@@ -25,10 +25,10 @@ public class Category {
     public void setId(Integer id) {
         this.id = id;
     }
-    public String getCategory() {
-        return category;
+    public String getName() {
+        return name;
     }
-    public void setCategory(String category) {
-        this.category = category;
+    public void setName(String category) {
+        this.name = category;
     }
 }

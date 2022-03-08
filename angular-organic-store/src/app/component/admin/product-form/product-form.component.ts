@@ -39,7 +39,7 @@ export class ProductFormComponent {
         this.form.controls['title'].setValue(product.title);
         this.form.controls['price'].setValue(product.price);
         this.form.controls['category'].setValue(product.category);
-        this.form.controls['imageUrl'].setValue(product.image_url);
+        this.form.controls['imageUrl'].setValue(product.url);
       })
     )
   }

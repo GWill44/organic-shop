@@ -1,1 +1,32 @@
-<p>shopping-cart works!</p>
+<h1>Shopping Cart</h1>
+<p>You have {{ shoppingCartService.getTotalItemQuantity() }} items in your shopping cart.</p>
+<table class="table" *ngIf="shoppingCartService.getTotalItemQuantity()>0">
+  <thead>
+  <tr>
+    <th class="col-4">Product</th>
+    <th class="col-4" style="text-align: center">Quantity</th>
+    <th class="col-4">Price</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of shoppingCartService.getCart()">
+    <td>{{item.title}}</td>
+    <td>
+      <button
+        (click)="updateCart(item.id, -1)"
+        type="button" class="btn btn-outline-secondary" style="float: left; width: 10%; margin-left: 30%"
+      > - </button>
+      <button
+        (click)="updateCart(item.id, 1)"
+        type="button" class="btn btn-outline-secondary" style="float: right; width: 10%; margin-right:30%"
+      > + </button>
+      <p style="float: right; width:11%">{{item.quantity}}</p>
+    </td>
+    <td>{{item.price*item.quantity | currency: 'USD'}}</td>
+    <td>
+
+    </td>
+  </tr>
+  </tbody>
+</table>
+

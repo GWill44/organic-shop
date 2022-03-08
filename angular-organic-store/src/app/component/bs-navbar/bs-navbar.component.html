@@ -10,7 +10,12 @@
           <a class="nav-link" routerLink="/products">Store</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/shopping-cart">Shopping Cart</a>
+          <a class="nav-link" routerLink="/shopping-cart">Shopping Cart
+            <span *ngIf="shoppingCartService.getTotalItemQuantity() > 0"
+                  class="badge rounded-pill bg-warning text-dark">
+              {{shoppingCartService.getTotalItemQuantity()}}
+            </span>
+          </a>
         </li>
         <ng-template #displayLogin>
           <li class="nav-item">
