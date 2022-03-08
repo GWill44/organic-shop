@@ -10,10 +10,18 @@ export class ShoppingCartService {
   updateCart(product: Product, addition: number) {
     let shoppingCart: ShoppingCartItem[] = this.getCart();
     let quantity = this.getItemQuantity(product) + addition;
-    let cartProduct = {quantity: quantity, ...product}
-    let newShoppingCart = shoppingCart.filter((cartProduct) => cartProduct.title !== product.title);
-    if(quantity > 0) newShoppingCart.push(cartProduct);
-    localStorage.setItem('shoppingCart', JSON.stringify(newShoppingCart))
+    let cartProduct = {quantity: quantity, ...product};
+
+    if(this.getItem(product)){
+      let index = shoppingCart.findIndex(cartProduct => cartProduct.title === product.title);
+      shoppingCart.splice(index, 1, cartProduct);
+    }else{
+      shoppingCart.push(cartProduct);
+    }
+
+    if (quantity<1) shoppingCart = shoppingCart.filter((cartProduct) => cartProduct.title !== product.title);
+
+    localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart))
   }
 
   getCart(){
@@ -22,8 +30,8 @@ export class ShoppingCartService {
   }
 
   getItemQuantity(product: Product){
-    return this.getProduct(product) ?
-      this.getProduct(product)!.quantity : 0;
+    return this.getItem(product) ?
+      this.getItem(product)!.quantity : 0;
   }
 
   getTotalItemQuantity(){
@@ -35,7 +43,7 @@ export class ShoppingCartService {
     return quantity;
   }
 
-  getProduct(product: Product){
+  getItem(product: Product){
     return this.getCart().find((shoppingCartItem: ShoppingCartItem) => shoppingCartItem.title === product.title);
   }
 }
