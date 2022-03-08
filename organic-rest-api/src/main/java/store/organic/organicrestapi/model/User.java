@@ -2,7 +2,7 @@ package store.organic.organicrestapi.model;
 
 import javax.persistence.*;
 
-@Entity(name="user")
+@Entity(name = "user")
 public class User {
 
     @Id

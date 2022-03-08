@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {AuthService} from "../../service/auth/auth.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
-import {throwError} from "rxjs";
+import {Subscription, throwError} from "rxjs";
 
 
 @Component({
@@ -10,13 +10,14 @@ import {throwError} from "rxjs";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
 
   invalidLogin!: boolean;
   form = new FormGroup({
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required])
   })
+  submitSub: Subscription;
 
   constructor(
     private router: Router,
@@ -24,7 +25,7 @@ export class LoginComponent {
     private authService: AuthService) {}
 
   onSubmit(credentials: any) {
-    this.authService.login(credentials.username, credentials.password)
+    this.submitSub =this.authService.login(credentials.username, credentials.password)
       .subscribe({
         next: result => {
           let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
@@ -39,4 +40,8 @@ export class LoginComponent {
 
   get username(){ return this.form.get('username'); }
   get password(){ return this.form.get('password'); }
+
+  ngOnDestroy(): void {
+    this.submitSub.unsubscribe();
+  }
 }

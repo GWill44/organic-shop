@@ -20,7 +20,10 @@ import {AdminAuthGuard} from "./service/auth/admin-auth-guard.service";
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {JWT_OPTIONS, JwtHelperService} from "@auth0/angular-jwt";
-import { ProductFormComponent } from './component/admin/product-form/product-form.component';
+import {ProductFormComponent} from './component/admin/product-form/product-form.component';
+import {CategoryService} from "./service/category/category.service";
+import {ProductService} from "./service/product/product.service";
+import { DataTablesModule } from "angular-datatables";
 
 
 @NgModule({
@@ -43,14 +46,17 @@ import { ProductFormComponent } from './component/admin/product-form/product-for
     AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DataTablesModule
   ],
   providers: [
     AuthService,
     AuthGuard,
     AdminAuthGuard,
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
-    JwtHelperService
+    JwtHelperService,
+    CategoryService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })
