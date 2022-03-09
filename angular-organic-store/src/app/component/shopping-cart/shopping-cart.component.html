@@ -5,6 +5,7 @@
     <table class="table">
       <thead>
       <tr>
+        <th></th>
         <th class="col-2">Product</th>
         <th class="col-4 text-center">Quantity</th>
         <th class="col-2">Price</th>
@@ -12,6 +13,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let item of shoppingCartService.getCart()">
+        <th><img src="{{item.url}}" alt="{{item.title}}" class="img-thumbnail" style="height: 100px; width: auto;"></th>
         <td>{{item.title}}</td>
         <td>
           <button
@@ -37,6 +39,7 @@
       <tr>
         <th></th>
         <th></th>
+        <th></th>
         <th>{{shoppingCartService.getTotalPrice() | currency: 'USD'}}</th>
       </tr>
       </tfoot>
@@ -44,7 +47,7 @@
   </div>
   <button
     (click)="shoppingCartService.clearAll()"
-    class="btn btn-danger"
+    class="btn btn-danger btn-sm"
   >Clear Shopping Cart</button>
 </div>
 

@@ -11,6 +11,7 @@ import {Product} from "../../model/product";
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit, OnDestroy {
+  category: string | null;
   products: Product[] = [];
   filteredProducts: Product[];
   productsSub: Subscription;
@@ -26,11 +27,15 @@ export class ProductsComponent implements OnInit, OnDestroy {
         return this.route.queryParamMap;
       }))
       .subscribe(params =>{
-        let category = params.get('category');
-        this.filteredProducts = (category) ?
-          this.products.filter(product => product.category === category) :
-          this.products;
+        this.category = params.get('category');
+        this.applyFilter()
       });
+  }
+
+  private applyFilter() {
+    this.filteredProducts = (this.category) ?
+      this.products.filter(product => product.category === this.category) :
+      this.products;
   }
 
   ngOnDestroy() {
