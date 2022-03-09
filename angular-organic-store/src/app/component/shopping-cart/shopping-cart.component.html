@@ -1,48 +1,50 @@
 <h1>Shopping Cart</h1>
 <p>You have {{ shoppingCartService.getTotalItemQuantity() }} items in your shopping cart.</p>
 <div *ngIf="shoppingCartService.getTotalItemQuantity()>0">
-  <table class="table">
-    <thead>
-    <tr>
-      <th class="col-4">Product</th>
-      <th class="col-4 text-center">Quantity</th>
-      <th class="col-4">Price</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let item of shoppingCartService.getCart()">
-      <td>{{item.title}}</td>
-      <td>
-        <button
-          (click)="updateCart(item.id, -1)"
-          type="button" class="btn btn-outline-secondary text-center" style="float: left; width: 10%; margin-left: 30%"
-        >-</button>
-        <button
-          (click)="updateCart(item.id, 1)"
-          type="button" class="btn btn-outline-secondary text-center" style="float: right; width: 10%; margin-right:30%"
-        > + </button>
-        <p class="text-center">{{item.quantity}}</p>
-      </td>
-      <td>{{item.price*item.quantity | currency: 'USD'}}</td>
-      <td>
-        <button
-          type="button" class="btn btn-outline-danger"
-          (click)="updateCart(item.id, -item.quantity)"
-        ><i class="bi bi-trash"></i></button>
-      </td>
-    </tr>
-    </tbody>
-    <tfoot>
-    <tr>
-      <th></th>
-      <th></th>
-      <th>{{shoppingCartService.getTotalPrice() | currency: 'USD'}}</th>
-    </tr>
-    </tfoot>
-  </table>
+  <div class="row col-10">
+    <table class="table">
+      <thead>
+      <tr>
+        <th class="col-2">Product</th>
+        <th class="col-4 text-center">Quantity</th>
+        <th class="col-2">Price</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of shoppingCartService.getCart()">
+        <td>{{item.title}}</td>
+        <td>
+          <button
+            (click)="updateCart(item.id, -1)"
+            type="button" class="btn btn-outline-secondary text-center" style="float: left; width: 10%; margin-left: 30%"
+          >-</button>
+          <button
+            (click)="updateCart(item.id, 1)"
+            type="button" class="btn btn-outline-secondary text-center" style="float: right; width: 10%; margin-right:30%"
+          > + </button>
+          <p class="text-center">{{item.quantity}}</p>
+        </td>
+        <td>{{item.price*item.quantity | currency: 'USD'}}</td>
+        <td class="col-1">
+          <button
+            type="button" class="btn btn-outline-danger"
+            (click)="updateCart(item.id, -item.quantity)"
+          ><i class="bi bi-trash"></i></button>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <th></th>
+        <th></th>
+        <th>{{shoppingCartService.getTotalPrice() | currency: 'USD'}}</th>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
   <button
-  (click)="shoppingCartService.clearAll()"
-  class="btn btn-danger btn-sm"
+    (click)="shoppingCartService.clearAll()"
+    class="btn btn-danger"
   >Clear Shopping Cart</button>
-
 </div>
+
