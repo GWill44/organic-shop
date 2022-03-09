@@ -1,11 +1,15 @@
-import { Injectable } from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable, take} from "rxjs";
+import {Observable, Subscription, take} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class ProductService implements OnDestroy{
+
+  addProductSub: Subscription;
+  updateProductSub: Subscription;
+  deleteProductSub: Subscription;
 
   constructor(private http: HttpClient) { }
 
@@ -51,5 +55,11 @@ export class ProductService {
     return this.http.delete(`http://localhost:8080/api/product/delete/${id}`,{headers: headers}).pipe(
       take(1)
     ).subscribe();
+  }
+
+  ngOnDestroy() {
+    this.addProductSub.unsubscribe();
+    this.updateProductSub.unsubscribe();
+    this.deleteProductSub.unsubscribe();
   }
 }

@@ -5,6 +5,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CategoryService} from "../../service/category/category.service";
 import {ProductService} from "../../service/product/product.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {ShoppingCartService} from "../../service/shopping-cart/shopping-cart.service";
+import {OrderService} from "../../service/order/order.service";
 
 @Component({
   selector: 'app-checkout',
@@ -22,10 +24,15 @@ export class CheckoutComponent {
     postCode: new FormControl('', [Validators.required])
   });
 
-  constructor() { }
+  constructor(private shoppingCartService: ShoppingCartService, private orderService: OrderService) { }
 
-  onSubmit(formContent) {
-    console.log(formContent);
+  onSubmit() {
+    let order = {
+      datePlaced: new Date().getTime(),
+      shipping: this.form.value,
+      cart: this.shoppingCartService.getCart()
+    }
+    this.orderService.placeOrder(order);
   }
 
   get firstName(){ return this.form.get('firstName'); }

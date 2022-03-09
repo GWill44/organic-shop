@@ -49,7 +49,7 @@ export class ProductFormComponent {
       this.productService.updateProduct(formContent, this.id);
       this.router.navigate(['/admin/products']);
     } else {
-      this.productService.addProduct(formContent)
+      this.productService.addProduct(formContent);
       this.router.navigate(['/admin/products']);
     }
   }
