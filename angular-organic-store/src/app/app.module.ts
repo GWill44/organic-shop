@@ -28,8 +28,6 @@ import {ProductFilterComponent} from "./component/products/product-filter/produc
 import { ProductCardComponent } from './component/products/product-card/product-card.component';
 import {ShoppingCartService} from "./service/shopping-cart/shopping-cart.service";
 
-
-
 @NgModule({
   declarations: [
     AppComponent,

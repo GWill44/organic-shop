@@ -46,5 +46,17 @@ export class ShoppingCartService {
   getItem(product: Product){
     return this.getCart().find((shoppingCartItem: ShoppingCartItem) => shoppingCartItem.title === product.title);
   }
+
+  getTotalPrice(){
+    let sum = 0;
+    for (let item of this.getCart()){
+      sum = sum + (item.quantity * item.price);
+    }
+    return sum;
+  }
+
+  clearAll(){
+    localStorage.removeItem('shoppingCart');
+  }
 }
 
