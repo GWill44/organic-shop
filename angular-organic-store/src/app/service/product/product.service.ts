@@ -35,6 +35,7 @@ export class ProductService implements OnDestroy{
       .set('Access-Control-Allow-Origin', '*');
     return this.http.post('http://localhost:8080/api/product/add', formContent, {'headers': headers})
       .subscribe();
+
   }
 
   updateProduct(product:any, id: number) {
