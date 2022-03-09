@@ -1,5 +1,9 @@
 <h1>Shopping Cart</h1>
 <p>You have {{ shoppingCartService.getTotalItemQuantity() }} items in your shopping cart.</p>
+<button
+  (click)="shoppingCartService.clearAll()"
+  class="btn btn-light btn-sm"
+>Clear Shopping Cart</button>
 <div *ngIf="shoppingCartService.getTotalItemQuantity()>0">
   <div class="row col-10">
     <table class="table">
@@ -46,8 +50,7 @@
     </table>
   </div>
   <button
-    (click)="shoppingCartService.clearAll()"
-    class="btn btn-danger btn-sm"
-  >Clear Shopping Cart</button>
+    routerLink="/checkout"
+    class="btn btn-primary">Check Out</button>
 </div>
 

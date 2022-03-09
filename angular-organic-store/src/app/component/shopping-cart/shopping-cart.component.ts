@@ -14,7 +14,6 @@ export class ShoppingCartComponent {
   updateCart(productId: number, addition: number) {
    this.productService.getProduct(productId).subscribe(
        product => {
-         console.log(product);
          this.shoppingCartService.updateCart(product, addition);
        }
    );
