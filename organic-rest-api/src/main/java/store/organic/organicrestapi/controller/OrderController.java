@@ -1,33 +1,38 @@
 package store.organic.organicrestapi.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import store.organic.organicrestapi.model.Order;
-import store.organic.organicrestapi.model.request.OrderCreationRequest;
-import store.organic.organicrestapi.service.OrderService;
 
-import java.util.List;
+import store.organic.organicrestapi.model.request.AddOrderDetailsRequest;
+import store.organic.organicrestapi.model.request.AddOrderProductsRequest;
+import store.organic.organicrestapi.service.OrderDetailsService;
+import store.organic.organicrestapi.service.OrderProductsService;
+
 
 @RestController
 @RequestMapping(value = "/api/order")
 public class OrderController {
 
     @Autowired
-    private OrderService orderService;
+    private OrderDetailsService orderDetailsService;
 
-    @GetMapping("/all")
+    @Autowired
+    private OrderProductsService orderProductsService;
+
+    @PostMapping("/addDetails")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<List<Order>> getOrders() {
-        List <Order> orderList = orderService.getAll();
-        return new ResponseEntity<>(orderList, HttpStatus.OK);
+    public ResponseEntity<?> addDetails(@RequestBody AddOrderDetailsRequest addOrderDetailsRequest) {
+        Long orderId = orderDetailsService.addDetails(addOrderDetailsRequest);
+        return new ResponseEntity<>(orderId, HttpStatus.OK);
     }
-    @PostMapping("/create")
-    public ResponseEntity<?> createOrder(@RequestBody OrderCreationRequest orderCreationRequest) {
-        orderService.createOrder(orderCreationRequest);
+
+    @PostMapping("/addProducts")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> addProducts(@RequestBody AddOrderProductsRequest addOrderProductsRequest) {
+        orderProductsService.addProducts(addOrderProductsRequest);
         return ResponseEntity.ok().build();
     }
 }
