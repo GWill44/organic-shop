@@ -32,7 +32,7 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
                         addOrderDetailsRequest.getPost_code()
                 )
         );
-        Long orderId = orderDetailsRepository.findByUser_id(addOrderDetailsRequest.getUser_id()).get().getOrder_id();
+        Long orderId = orderDetailsRepository.findByUser(addOrderDetailsRequest.getUser_id()).get().getOrder_id();
         return orderId;
     }
 }

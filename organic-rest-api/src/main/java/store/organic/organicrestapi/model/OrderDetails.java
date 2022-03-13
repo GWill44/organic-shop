@@ -8,7 +8,7 @@ public class OrderDetails {
 
     @Id
     private Long order_id;
-    private Long user_id;
+    private Long user;
     private Date date;
     private String first_name;
     private String last_name;
@@ -20,10 +20,10 @@ public class OrderDetails {
     public OrderDetails(){}
 
     public OrderDetails(
-            Long user_id, Date date, String first_name, String last_name,
+            Long user, Date date, String first_name, String last_name,
             String address_line_1, String address_line_2, String city, String post_code){
 
-        this.user_id = user_id;
+        this.user = user;
         this.date = date;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -39,10 +39,10 @@ public class OrderDetails {
     public void setOrder_id(Long order_id) {this.order_id = order_id;
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUser() {
+        return user;
     }
-    public void setUser_id(Long user_id) {this.user_id = user_id;
+    public void setUser(Long user) {this.user = user;
     }
 
     public Date getDate() {
