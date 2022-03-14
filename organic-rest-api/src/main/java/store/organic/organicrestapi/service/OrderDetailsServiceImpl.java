@@ -7,7 +7,7 @@ import store.organic.organicrestapi.repository.OrderDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.sql.Date;
 
 @Service
 public class OrderDetailsServiceImpl implements OrderDetailsService {
@@ -15,24 +15,21 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     @Autowired
     private OrderDetailsRepository orderDetailsRepository;
 
-    public List<OrderDetails> getAll() {
-        return orderDetailsRepository.findAll();
-    }
-
-    public Long addDetails(AddOrderDetailsRequest addOrderDetailsRequest) {
+    public void addDetails(AddOrderDetailsRequest addOrderDetailsRequest) {
         orderDetailsRepository.save(
                 new OrderDetails(
-                        addOrderDetailsRequest.getUser_id(),
+                        addOrderDetailsRequest.getUser(),
                         addOrderDetailsRequest.getDate(),
-                        addOrderDetailsRequest.getFirst_name(),
-                        addOrderDetailsRequest.getLast_name(),
-                        addOrderDetailsRequest.getAddress_line_1(),
-                        addOrderDetailsRequest.getAddress_line_2(),
+                        addOrderDetailsRequest.getFirstName(),
+                        addOrderDetailsRequest.getLastName(),
+                        addOrderDetailsRequest.getAddressLine1(),
+                        addOrderDetailsRequest.getAddressLine2(),
                         addOrderDetailsRequest.getCity(),
-                        addOrderDetailsRequest.getPost_code()
+                        addOrderDetailsRequest.getPostCode()
                 )
         );
-        Long orderId = orderDetailsRepository.findByUser(addOrderDetailsRequest.getUser_id()).get().getOrder_id();
-        return orderId;
+    }
+    public Long getOrderId(Date date){
+        return orderDetailsRepository.findByDate(date).get().getOrder_id();
     }
 }

@@ -1,13 +1,15 @@
 package store.organic.organicrestapi.model;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity(name = "user_order_details")
 public class OrderDetails {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long order_id;
+
     private Long user;
     private Date date;
     private String first_name;

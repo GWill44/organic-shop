@@ -1,22 +1,22 @@
 package store.organic.organicrestapi.model.request;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class AddOrderDetailsRequest {
 
-    private Long user_id;
+    private Long user;
     private Date date;
-    private String first_name;
-    private String last_name;
-    private String address_line_1;
-    private String address_line_2;
+    private String firstName;
+    private String lastName;
+    private String addressLine1;
+    private String addressLine2;
     private String city;
-    private String post_code;
+    private String postCode;
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUser() {
+        return user;
     }
-    public void setUser_id(Long user_id) {this.user_id = user_id;
+    public void setUser(Long user) {this.user = user;
     }
 
     public Date getDate() {
@@ -26,32 +26,32 @@ public class AddOrderDetailsRequest {
         this.date = date;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getAddress_line_1() {
-        return address_line_1;
+    public String getLastName() {
+        return lastName;
     }
-    public void setAddress_line_1(String address_line_1) {
-        this.address_line_1 = address_line_1;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getAddress_line_2() {
-        return address_line_2;
+    public String getAddressLine1() {
+        return addressLine1;
     }
-    public void setAddress_line_2(String address_line_2) {
-        this.address_line_2 = address_line_2;
+    public void setAddressLine1(String addressLine1) {
+        this.addressLine1 = addressLine1;
+    }
+
+    public String getAddressLine2() {
+        return addressLine2;
+    }
+    public void setAddressLine2(String addressLine2) {
+        this.addressLine2 = addressLine2;
     }
 
     public String getCity() {
@@ -61,11 +61,11 @@ public class AddOrderDetailsRequest {
         this.city = city;
     }
 
-    public String getPost_code() {
-        return post_code;
+    public String getPostCode() {
+        return postCode;
     }
-    public void setPost_code(String post_code) {
-        this.post_code = post_code;
+    public void setPostCode(String postCode) {
+        this.postCode = postCode;
     }
 
 }

@@ -6,10 +6,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+
 import store.organic.organicrestapi.model.request.AddOrderDetailsRequest;
 import store.organic.organicrestapi.model.request.AddOrderProductsRequest;
 import store.organic.organicrestapi.service.OrderDetailsService;
 import store.organic.organicrestapi.service.OrderProductsService;
+
+import java.sql.Date;
+
 
 
 @RestController
@@ -22,11 +26,18 @@ public class OrderController {
     @Autowired
     private OrderProductsService orderProductsService;
 
+    @GetMapping("/orderId/{date}")
+    @PreAuthorize("hasRole('Admin')")
+    public ResponseEntity<Long> getOrderId(@PathVariable(value = "date") Date date){
+        Long orderId = orderDetailsService.getOrderId(date);
+        return new ResponseEntity<>(orderId, HttpStatus.OK);
+    }
+
     @PostMapping("/addDetails")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> addDetails(@RequestBody AddOrderDetailsRequest addOrderDetailsRequest) {
-        Long orderId = orderDetailsService.addDetails(addOrderDetailsRequest);
-        return new ResponseEntity<>(orderId, HttpStatus.OK);
+        orderDetailsService.addDetails(addOrderDetailsRequest);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/addProducts")
