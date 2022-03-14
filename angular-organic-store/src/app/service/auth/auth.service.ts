@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {catchError, map, throwError} from "rxjs";
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {UserToken} from "../../model/user-token";
+import {User} from "../../model/user";
 
 @Injectable({
   providedIn: 'root'
@@ -39,11 +39,11 @@ export class AuthService {
     return false;
   }
 
-  get currentUser(): UserToken | null {
+  get currentUser(): User | null {
     const jwtHelper = new JwtHelperService();
     const token = localStorage.getItem('token') as string;
     if (!token) return null;
     const userToken = jwtHelper.decodeToken(token);
-    return new UserToken(userToken.id, userToken.sub, userToken.admin, userToken.exp);
+    return new User(userToken.id, userToken.sub, userToken.admin, userToken.exp);
   }
 }

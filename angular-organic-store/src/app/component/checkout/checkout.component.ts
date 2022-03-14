@@ -1,12 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {Observable, tap} from "rxjs";
-import {Product} from "../../model/product";
+import { Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {CategoryService} from "../../service/category/category.service";
-import {ProductService} from "../../service/product/product.service";
-import {ActivatedRoute, Router} from "@angular/router";
 import {ShoppingCartService} from "../../service/shopping-cart/shopping-cart.service";
 import {OrderService} from "../../service/order/order.service";
+import {AuthService} from "../../service/auth/auth.service";
 
 @Component({
   selector: 'app-checkout',
@@ -24,13 +20,17 @@ export class CheckoutComponent {
     postCode: new FormControl('', [Validators.required])
   });
 
-  constructor(private shoppingCartService: ShoppingCartService, private orderService: OrderService) { }
+  constructor(
+    private shoppingCartService: ShoppingCartService,
+    private orderService: OrderService,
+    private authService: AuthService ) { }
 
   onSubmit() {
     let order = {
-      datePlaced: new Date().getTime(),
+      user: this.authService.currentUser?.id,
+      date: new Date().getTime(),
       shipping: this.form.value,
-      cart: this.shoppingCartService.getCart()
+      shoppingCart: this.shoppingCartService.getCart()
     }
     this.orderService.placeOrder(order);
   }

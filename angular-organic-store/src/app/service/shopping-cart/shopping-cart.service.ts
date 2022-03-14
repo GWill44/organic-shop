@@ -29,6 +29,13 @@ export class ShoppingCartService {
       JSON.parse(<string>localStorage.getItem('shoppingCart')) : [];
   }
 
+  getProductsAndQuantities(){
+
+    for(let item of this.getCart()){
+
+    }
+  }
+
   getItemQuantity(product: Product){
     return this.getItem(product) ?
       this.getItem(product)!.quantity : 0;
