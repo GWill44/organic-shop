@@ -7,15 +7,14 @@ import store.organic.organicrestapi.repository.OrderDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
-
 @Service
 public class OrderDetailsServiceImpl implements OrderDetailsService {
 
     @Autowired
     private OrderDetailsRepository orderDetailsRepository;
 
-    public void addDetails(AddOrderDetailsRequest addOrderDetailsRequest) {
+    public Integer addDetails(AddOrderDetailsRequest addOrderDetailsRequest) {
+        Integer orderHash = addOrderDetailsRequest.hashCode();
         orderDetailsRepository.save(
                 new OrderDetails(
                         addOrderDetailsRequest.getUser(),
@@ -25,11 +24,15 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
                         addOrderDetailsRequest.getAddressLine1(),
                         addOrderDetailsRequest.getAddressLine2(),
                         addOrderDetailsRequest.getCity(),
-                        addOrderDetailsRequest.getPostCode()
+                        addOrderDetailsRequest.getPostCode(),
+                        orderHash
                 )
         );
+        return orderHash;
     }
-    public Long getOrderId(Date date){
-        return orderDetailsRepository.findByDate(date).get().getOrder_id();
+    public Long getOrderId(Integer hash){
+        Long orderId = orderDetailsRepository.findByHash(hash).getOrder_id();
+        System.out.println(orderId);
+        return orderId;
     }
 }

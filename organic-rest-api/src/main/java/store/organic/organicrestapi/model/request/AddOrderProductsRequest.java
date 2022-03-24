@@ -6,14 +6,14 @@ import java.util.List;
 
 public class AddOrderProductsRequest {
 
-    Long orderId;
+    Integer hash;
     List<OrderItem> orderProducts;
 
-    public Long getOrderId() {
-        return orderId;
+    public Integer getHash() {
+        return hash;
     }
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
+    public void setHash(Integer hash) {
+        this.hash = hash;
     }
 
     public List<OrderItem> getOrderProducts() {

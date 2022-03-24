@@ -1,7 +1,7 @@
 package store.organic.organicrestapi.model;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity(name = "user_order_details")
 public class OrderDetails {
@@ -18,12 +18,13 @@ public class OrderDetails {
     private String address_line_2;
     private String city;
     private String post_code;
+    private Integer hash;
 
     public OrderDetails(){}
 
     public OrderDetails(
             Long user, Date date, String first_name, String last_name,
-            String address_line_1, String address_line_2, String city, String post_code){
+            String address_line_1, String address_line_2, String city, String post_code, Integer hash){
 
         this.user = user;
         this.date = date;
@@ -33,6 +34,7 @@ public class OrderDetails {
         this.address_line_2 = address_line_2;
         this.city = city;
         this.post_code = post_code;
+        this.hash = hash;
     }
 
     public Long getOrder_id() {
@@ -94,6 +96,13 @@ public class OrderDetails {
     }
     public void setPost_code(String post_code) {
         this.post_code = post_code;
+    }
+
+    public Integer getHash() {
+        return hash;
+    }
+    public void setHash(Integer hash) {
+        this.hash = hash;
     }
 
 }
